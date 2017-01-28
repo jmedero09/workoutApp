@@ -6,3 +6,64 @@
 @include foundation-everything;
 
 // Components
+body{
+
+/*	background-image:url('http://cdn.wallpapersafari.com/1/68/uoJ4pq.jpg');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover; */
+    background-color: blue;
+
+
+}
+.savedTitle h1 {
+    padding-top: 10px;
+}
+.dash-header{
+	margin-top:30px;
+}
+
+input[type="text"].addExerciseField{
+	width:70%;
+	display: inline;
+}
+/*input[type="text"].addWeight{
+	width:50%;
+	display: inline;
+}
+input[type="text"].addReps{
+	width:50%;
+	display: inline;
+
+}*/
+.button.button.large{
+	margin-right: 5px;
+	display: block;
+	width:50%;
+}
+.exercise-tile{
+	background-color: grey;
+	width:100%;
+}
+.savedTitle{
+	text-align: center;
+	width:150px;
+	height:100px;
+	background-color: grey;	
+	margin-bottom: 5px;
+}
+.savedTitle p{
+	text-align: right;
+}
+.login-container{
+	margin-top: 30%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border: 1px solid;
+	text-align: center;
+
+}
+.login-container p{
+	color:white;
+	font-weight: bolder;
+}
