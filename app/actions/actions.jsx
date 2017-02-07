@@ -1,4 +1,4 @@
-var redux = require('redux');
+import * as redux from'redux';
 import uuid from 'node-uuid';
 
 export var addExercise = (exercise)=>{
@@ -10,4 +10,13 @@ export var addExercise = (exercise)=>{
 	}
 }
 
-export default (addExercise);
+export var addExerciseDetails = (weight,reps)=>{
+	return{
+		type:'ADD_EXERCISE_DETAILS',
+		set:0,
+		weight:weight,
+		reps:reps		
+	}
+
+}
+

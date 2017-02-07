@@ -1,7 +1,11 @@
 import React from 'react';
-var {connect} = require('react-redux');
-var actions = require('../actions/actions');
-var {AddExerciseReducer} = require('../reducers/reducers');
+import {connect} from 'react-redux';
+import * as actions from '../actions/actions';
+import {AddExerciseReducer} from '../reducers/reducers';
+import ExerciseTileList from './Exercise-Tile-List';
+import SetRepList from './SetRepsList';
+
+
 
 export var Dashboard = React.createClass({
 
@@ -19,15 +23,10 @@ export var Dashboard = React.createClass({
 	},
 	render:function(props){
 		console.log(this.props);
-
-
 		return (
 			<div className="row">
-				<div className="small-centered  small-12 columns text-center">
-					<p className="dash-header small-12 columns small-centered ">Welcome to your Dashboard. Please add an exercise to your dashboard and begin tracking your workout</p>
-				</div>
 				<div className="columns samll-centred">
-					{this.props.exercise}
+					<ExerciseTileList/>
 				</div>
 				<div className="small-12 columns text-center samll-centred">
 			        <form onSubmit={this.handleSubmit}>
@@ -40,12 +39,6 @@ export var Dashboard = React.createClass({
 		)
 	}
 });
-export var mapStateToProps = (state, props) => {
-  console.log('state',state);
-  return {
-    exercise: state.exercise
-  }
-};
-export default connect(mapStateToProps)(Dashboard);
+export default connect()(Dashboard);
 
 
