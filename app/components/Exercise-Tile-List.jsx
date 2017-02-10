@@ -23,7 +23,7 @@ export var ExerciseTileList = React.createClass({
 	}
 });
 export var mapStateToProps = (state, props) => {
-	console.log('yerrrr',state);
+	//console.log('yerrrr',state);
 	//whatever gets returned in here will show up as props from exercise list 
 	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
   return {

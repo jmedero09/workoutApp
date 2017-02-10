@@ -6,13 +6,15 @@ export var addExercise = (exercise)=>{
 		type:'ADD_EXERCISE',
 		id:uuid(),
 		exercise:exercise,
+		details:[]
 
 	}
 }
 
-export var addExerciseDetails = (weight,reps)=>{
+export var addExerciseDetails = (id,weight,reps)=>{
 	return{
 		type:'ADD_EXERCISE_DETAILS',
+		id:id,
 		set:0,
 		weight:weight,
 		reps:reps		

@@ -14,12 +14,13 @@ export var ExerciseTile = React.createClass({
     	var weight = this.refs.weight.value;
     	var reps = this.refs.reps.value;
 
-
-    	dispatch(actions.addExerciseDetails(weight,reps));
+		var attribute = $(e.target.attributes['data-reactid']).val();
+		var id = attribute.slice(10,46);
+		console.log(id);
+    	dispatch(actions.addExerciseDetails(id,weight,reps));
 
     	this.refs.weight.value = '';
     	this.refs.reps.value = '';
-		console.log('poooooop');
 
 	},
 	onKeyPress: function(e) {
@@ -51,11 +52,11 @@ export var ExerciseTile = React.createClass({
 	}
 });
 export var mapStateToProps = (state) => {
-	console.log('yerrrr',state.addDetail);
+	console.log('State',state.addExercise);
 	//whatever gets returned in here will show up as props from exercise list 
 	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
   return {
-  	exercise:state.addDetail
+  	exercise:state.addExercise
   }
   
 };

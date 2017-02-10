@@ -26,7 +26,7 @@ export var mapStateToProps = (state) => {
 	//whatever gets returned in here will show up as props from exercise list 
 	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
   return {
-  	detail:state.addDetail
+  	detail:state.addExercise
   }
   
 };
