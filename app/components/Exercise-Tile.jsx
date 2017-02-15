@@ -34,7 +34,7 @@ export var ExerciseTile = React.createClass({
 				<div className="exercise-tile small-12 columns">
 					<h1>{this.props.title}</h1>
 
-					<SetRepList/>
+					<SetRepList {...this.props}/>
 					
 					<form onKeyPress={this.onKeyPress}>
 					    <div className="small-4 columns">

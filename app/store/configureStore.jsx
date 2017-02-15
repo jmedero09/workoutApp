@@ -5,7 +5,6 @@ import {AddExerciseReducer, AddExerciseDetailsReducer} from 'reducers';
 export var configure = (initialState = {})=>{
 	var reducer = redux.combineReducers({
 		addExercise:AddExerciseReducer,
-		addDetail:AddExerciseDetailsReducer
 	});
 
 	var store = redux.createStore(reducer,initialState, redux.compose(

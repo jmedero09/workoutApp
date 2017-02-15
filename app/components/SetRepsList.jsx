@@ -5,13 +5,18 @@ import SetReps from './SetReps';
 export var SetRepsList = React.createClass({
 
 	renderList:function(){
-		return this.props.detail.map((detail)=>{
-			return(
-				<li key={detail.set}>
-					<SetReps set={detail.set} weight={detail.weight} reps={detail.reps}/>
-				</li>				
-			);
-		});
+		console.log('my this.props',this.props)
+		
+				return this.props.exercise[0].detail.map((details,index)=>{
+					return(
+
+						<li key={index}>
+							<SetReps weight={details.weight} reps={details.reps}/>
+						</li>
+					)
+
+				});					
+			
 	},
 	render:function(props){
 		return (
@@ -21,13 +26,5 @@ export var SetRepsList = React.createClass({
 		)
 	}
 });
-export var mapStateToProps = (state) => {
-	console.log('yerrrr',state);
-	//whatever gets returned in here will show up as props from exercise list 
-	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
-  return {
-  	detail:state.addExercise
-  }
+export default SetRepsList
   
-};
-export default connect(mapStateToProps)(SetRepsList);
