@@ -1,9 +1,12 @@
 import React from 'react';
 
 
-export var SetReps = React.createClass({
+class SetReps extends React.Component{
+	constructor(props){
+		super(props);
+	}
 
-render:function(props){
+render(props){
 	
 	return(
 		<div className="row small-centered">
@@ -13,7 +16,7 @@ render:function(props){
 		</div>
 		)
 	}
-});
+}
 
 export default (SetReps);
 

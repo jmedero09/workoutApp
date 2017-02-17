@@ -2,12 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import SetReps from './SetReps';
 
-export var SetRepsList = React.createClass({
+class SetRepsList extends React.Component {
+	constructor(props){
+		super(props);
+	}
 
-	renderList:function(){
+	renderList(){
 		console.log('my this.props',this.props)
-		
-				return this.props.exercise[0].detail.map((details,index)=>{
+				return this.props.map((details,index)=>{
 					return(
 
 						<li key={index}>
@@ -17,14 +19,14 @@ export var SetRepsList = React.createClass({
 
 				});					
 			
-	},
-	render:function(props){
+	}
+	render(props){
 		return (
 			<ul className="small-centered  small-12 columns text-center">
 				{this.renderList()}
 			</ul>
 		)
 	}
-});
-export default SetRepsList
+}
+export default SetRepsList;
   

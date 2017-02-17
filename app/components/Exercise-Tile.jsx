@@ -2,11 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
 import {AddExerciseDetailsReducer} from '../reducers/reducers';
-import SetRepList from './SetRepsList';
+import SetRep from './SetReps';
 
-export var ExerciseTile = React.createClass({
+class ExerciseTile extends React.Component {
+	constructor(props){
+		super(props) 
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onKeyPress = this.onKeyPress.bind(this);
 
-	handleSubmit:function(e){
+	}
+	handleSubmit(e){
 		e.preventDefault();
 
 		var{dispatch} = this.props;
@@ -16,25 +21,28 @@ export var ExerciseTile = React.createClass({
 
 		var attribute = $(e.target.attributes['data-reactid']).val();
 		var id = attribute.slice(10,46);
-		console.log(id);
     	dispatch(actions.addExerciseDetails(id,weight,reps));
 
     	this.refs.weight.value = '';
     	this.refs.reps.value = '';
 
-	},
-	onKeyPress: function(e) {
+	}
+	onKeyPress(e) {
     if(e.key === 'Enter')
         this.handleSubmit(e);
-  	},
-
-	render:function(props){
+  	}
+	render(props){
+		console.log('props in exercise-tile',this.props.detail);
 		return (
 			<div className="row small-centered">
 				<div className="exercise-tile small-12 columns">
 					<h1>{this.props.title}</h1>
 
-					<SetRepList {...this.props}/>
+						{this.props.detail.map((detail,index)=>{
+
+							return <SetRep weight={detail.weight} reps={detail.reps}/>
+
+						})}
 					
 					<form onKeyPress={this.onKeyPress}>
 					    <div className="small-4 columns">
@@ -50,8 +58,8 @@ export var ExerciseTile = React.createClass({
 			</div>
 		)
 	}
-});
-export var mapStateToProps = (state) => {
+};
+ var mapStateToProps = (state) => {
 	console.log('State',state.addExercise);
 	//whatever gets returned in here will show up as props from exercise list 
 	//var something = state.addExercise.map(function(exercise){return exercise.exercise});

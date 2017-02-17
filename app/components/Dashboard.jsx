@@ -7,9 +7,14 @@ import SetRepList from './SetRepsList';
 
 
 
-export var Dashboard = React.createClass({
+class Dashboard extends React.Component{
+	constructor(props){
+		super(props);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
-	handleSubmit:function(e){
+	}
+
+	handleSubmit(e){
     	e.preventDefault();
 
     	var{dispatch, exercise} = this.props;
@@ -20,8 +25,8 @@ export var Dashboard = React.createClass({
 
     	this.refs.addExercise.value = '';
 
-	},
-	render:function(props){
+	}
+	render(props){
 		console.log(this.props);
 		return (
 			<div className="row">
@@ -38,7 +43,7 @@ export var Dashboard = React.createClass({
 			</div>
 		)
 	}
-});
+}
 export default connect()(Dashboard);
 
 
