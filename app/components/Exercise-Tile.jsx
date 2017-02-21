@@ -19,6 +19,20 @@ class ExerciseTile extends React.Component {
     	var weight = this.refs.weight.value;
     	var reps = this.refs.reps.value;
 
+    	if(!weight.length && !reps.length ){
+
+    		return alert('Please be sure to fill out both weight and reps field');
+    	}
+
+    	if(weight.length > 4){
+
+    		return alert('Sorry weight can be no more then 4 chracters long');
+    	}
+    	if(reps.length > 2){
+
+    		return alert('Sorry reps can be no more then 2 chracters long');
+    	}
+
 		var attribute = $(e.target.attributes['data-reactid']).val();
 		var id = attribute.slice(10,46);
     	dispatch(actions.addExerciseDetails(id,weight,reps));
@@ -32,7 +46,6 @@ class ExerciseTile extends React.Component {
         this.handleSubmit(e);
   	}
 	render(props){
-		console.log('props in exercise-tile',this.props.detail);
 		return (
 			<div className="row small-centered">
 				<div className="exercise-tile small-12 columns">
@@ -40,7 +53,7 @@ class ExerciseTile extends React.Component {
 
 						{this.props.detail.map((detail,index)=>{
 
-							return <SetRep weight={detail.weight} reps={detail.reps}/>
+							return <SetRep set={++index} weight={detail.weight} reps={detail.reps}/>
 
 						})}
 					

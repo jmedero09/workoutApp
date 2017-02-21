@@ -5,10 +5,12 @@ var {Provider} = require('react-redux');
 import Dashboard from './components/Dashboard';
 import ExerciseTile from './components/Exercise-Tile';
 import SavedWorkOut from './components/SavedWorkOut';
+import SavedWorkoutList from './components/SavedWorkoutList';
 import Login from './components/Login';
 import * as actions from './actions/actions';
 import ExerciseTileList from './components/Exercise-Tile-List';
 import Main from './components/Main';
+import WorkoutDescription from './components/WorkoutDescription'
 
 var store = require('./store/configureStore').configure();
 
@@ -19,13 +21,6 @@ export var subscribe = store.subscribe(()=>{
 	console.log('New State ', store.getState());
 
 });
-
-// store.dispatch(actions.addExercise('Chest Press'));
-// store.dispatch(actions.addExercise('should Press'));
-// store.dispatch(actions.addExercise('leg Press'));
-// store.dispatch(actions.addExercise('push Press'));
-// store.dispatch(actions.addExercise('arm Press'));
-
 
 // Load foundation
 $(document).foundation();
@@ -38,6 +33,8 @@ ReactDOM.render(
 <Provider store={store}>
 	<Router history={hashHistory}>
 		<Route path="/" component={Main}>
+		 	<Route path="savedworkout" component={SavedWorkoutList}/>
+		 		<Route path="description" component={WorkoutDescription}/>
 			<IndexRoute component={Dashboard}/>
 		</Route>
 	</Router>	

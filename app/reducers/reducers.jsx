@@ -19,13 +19,25 @@ export var AddExerciseReducer = (state=[],action)=>{
 			    detail: {
 			      $push: [{
 			        reps: action.reps,
-			        weight: action.weight
+			        weight: action.weight,
 			      }]
 			    }
 			  }
 			});
 		default:
 			return state;
+	}
+}
+
+export var saveWorkoutReducer =(state=[],action)=>{
+	switch(action.type){
+		case'SAVE_WORKOUT':
+			return update(state,{$push:[{
+				workoutLabel:action.workoutLabel,
+				date:action.date
+			}]})
+		default:
+			return state;	
 	}
 }
 

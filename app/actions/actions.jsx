@@ -1,5 +1,7 @@
 import * as redux from'redux';
 import uuid from 'node-uuid';
+import moment from 'moment';
+
 
 export var addExercise = (exercise)=>{
 	return{
@@ -15,10 +17,17 @@ export var addExerciseDetails = (id,weight,reps)=>{
 	return{
 		type:'ADD_EXERCISE_DETAILS',
 		id:id,
-		set:0,
 		weight:weight,
 		reps:reps		
 	}
 
 }
 
+export var saveWorkout = (workoutLabel)=>{
+	return{
+		type:'SAVE_WORKOUT',
+		workoutLabel:workoutLabel,
+		date: moment().format("MMM Do YYYY")	
+	}
+
+}
