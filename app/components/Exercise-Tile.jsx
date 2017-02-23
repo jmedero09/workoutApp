@@ -19,7 +19,7 @@ class ExerciseTile extends React.Component {
     	var weight = this.refs.weight.value;
     	var reps = this.refs.reps.value;
 
-    	if(!weight.length && !reps.length ){
+    	if(!weight.length || !reps.length ){
 
     		return alert('Please be sure to fill out both weight and reps field');
     	}
@@ -53,18 +53,18 @@ class ExerciseTile extends React.Component {
 
 						{this.props.detail.map((detail,index)=>{
 
-							return <SetRep set={++index} weight={detail.weight} reps={detail.reps}/>
+							return <SetRep key={index} set={++index} weight={detail.weight} reps={detail.reps}/>
 
 						})}
 					
 					<form onKeyPress={this.onKeyPress}>
 					    <div className="small-4 columns">
 					      <label>Weight</label>
-					        <input name="weight" type="number" ref="weight" placeholder="Weight"/>
+					        <input name="weight" type="number" ref="weight"/>
 					    </div>
 					    <div className="small-4 columns">
 					      <label>Reps</label>
-					        <input name="reps" type="number" ref="reps" placeholder="Reps"/>
+					        <input name="reps" type="number" ref="reps"/>
 					    </div>
 					</form>
 				</div>
@@ -73,12 +73,8 @@ class ExerciseTile extends React.Component {
 	}
 };
  var mapStateToProps = (state) => {
-	console.log('State',state.addExercise);
-	//whatever gets returned in here will show up as props from exercise list 
-	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
   return {
   	exercise:state.addExercise
   }
-  
 };
 export default connect(mapStateToProps)(ExerciseTile);

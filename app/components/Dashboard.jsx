@@ -5,6 +5,8 @@ import {AddExerciseReducer} from '../reducers/reducers';
 import ExerciseTileList from './Exercise-Tile-List';
 import SetRepList from './SetRepsList';
 import moment from 'moment';
+import axios from 'axios';
+
 
 
 
@@ -34,6 +36,10 @@ class Dashboard extends React.Component{
 
     	this.refs.addExercise.value = '';
 
+    	axios.get('https://jsonplaceholder.typicode.com/users')
+  		.then(function(response){
+    	console.log(response.data)
+  		});
 	}
 	handleSave(e){
 		e.preventDefault();
@@ -51,8 +57,6 @@ class Dashboard extends React.Component{
 
 		}
 		dispatch(actions.saveWorkout(workout));
-		console.log(workout);
-
 	}
 	render(props){
 		console.log(this.props);

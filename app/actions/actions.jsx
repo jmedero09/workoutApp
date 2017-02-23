@@ -27,7 +27,14 @@ export var saveWorkout = (workoutLabel)=>{
 	return{
 		type:'SAVE_WORKOUT',
 		workoutLabel:workoutLabel,
-		date: moment().format("MMM Do YYYY")	
+		date: moment().format("MMM Do YYYY"),
+		storedSessoin:[]	
 	}
+}
 
+export var openWorkout = (id)=>{
+	return{
+		type:'OPEN_WORKOUT',
+		id:id
+	}
 }

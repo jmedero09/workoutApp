@@ -1,5 +1,7 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
+import ReduxPromise from 'redux-promise';
+
 import {AddExerciseReducer, AddExerciseDetailsReducer, saveWorkoutReducer} from 'reducers';
 
 export var configure = (initialState = {})=>{

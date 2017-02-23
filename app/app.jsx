@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from'react-dom';
 import{Route, Router, IndexRoute, hashHistory} from 'react-router';
-var {Provider} = require('react-redux');
+import {Provider} from'react-redux';
+import ReduxPromise from 'redux-promise';
 import Dashboard from './components/Dashboard';
 import ExerciseTile from './components/Exercise-Tile';
 import SavedWorkOut from './components/SavedWorkOut';

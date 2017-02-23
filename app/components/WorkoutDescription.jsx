@@ -5,25 +5,38 @@ import {AddExerciseDetailsReducer} from '../reducers/reducers';
 import SetRep from './SetReps';
 
 
-
 class WorkoutDescription extends React.Component {
 	constructor(props){
 		super(props);
+		this.exercises = [];
 	}
-	render(props){
-		return(
-			
-			<div className="exercise-tile small-12 columns">
-				<h1>{this.props.title}</h1>
+	 render(props){
+        console.log(this.props.description.exercise);
+        
+        
+             this.exercises = this.props.description.map((detail,index)=>
 
-				{this.props.description.map((detail,index)=>{
-					return <SetRep set={++index} weight={detail.details.weight} reps={detail.reps}/>
-				})}
-			</div>
-			
-		)
+                    
+             		<div>
+                    <h1>{detail.exercise}</h1>
 
-	}
+                    detail.detail.map((item,i)=> {
+
+                    <SetRep set={++index} weight={item.weight} reps={item.reps}/>
+
+                    });
+                    </div>
+                   
+            );
+        
+        
+        return(
+            <div className="exercise-tile small-12 columns text-center">
+              {this.exercises}
+            </div>
+        )
+
+    }
 }
 var mapStateToProps = (state) => {
 	console.log('State',state.addExercise);

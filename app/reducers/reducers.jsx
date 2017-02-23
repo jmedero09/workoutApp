@@ -34,7 +34,8 @@ export var saveWorkoutReducer =(state=[],action)=>{
 		case'SAVE_WORKOUT':
 			return update(state,{$push:[{
 				workoutLabel:action.workoutLabel,
-				date:action.date
+				date:action.date,
+				storedSession:[{...state}]
 			}]})
 		default:
 			return state;	

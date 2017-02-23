@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import SavedWorkout from './SavedWorkOut';
+import {Link, IndexLink} from 'react-router';
 
 
 
@@ -12,10 +13,9 @@ class SavedWorkoutList extends React.Component{
 		console.log(this.props.saved)
 		return this.props.saved.savedWorkout.map((savedWorkout,index)=>{
 			return(
-
-				<a><li key={index}>
+				<Link to="description"><li key={index}>
 					<SavedWorkout workout={savedWorkout.workoutLabel} date={savedWorkout.date}/>
-				</li></a>				
+				</li></Link>				
 			);
 		});
 	}

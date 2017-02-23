@@ -12,7 +12,7 @@ body{
     background-repeat: no-repeat;
     background-position:center;
     background-size: cover; */
-    background-color: blue;
+    background-color: white;
 
 
 }
@@ -36,24 +36,42 @@ input[type="text"].addReps{
 	display: inline;
 
 }*/
+.button{
+	background-color: #ed1b5c;
+}
 .button.button.large{
 	margin-right: 5px;
 	display: block;
 	width:50%;
+	
+}
+.logoImg{
+	padding-top: 35px;
 }
 .exercise-tile{
-	background-color: grey;
-	width:100%;
+    background-color:rgba(154, 154, 154, 0.08);
+    border-top: 1px solid #ed1b5c;
+    border-bottom: 1px solid #ed1b5c;
+    width: 100%;
+    padding: 20px 0;
 }
 .savedTitle{
 	text-align: center;
-	width:150px;
+	width:200px;
 	height:100px;
-	background-color: grey;	
 	margin-bottom: 5px;
+	background-color:rgba(154, 154, 154, 0.08);
+    border-top: 1px solid #ed1b5c;
+    border-bottom: 1px solid #ed1b5c;
+    padding: 20px 0;	
 }
 .savedTitle p{
 	text-align: center;
+	font-size: 12px;
+}
+
+.savedTitle h1{
+	font-size: 15px;
 }
 .login-container{
 	margin-top: 30%;
