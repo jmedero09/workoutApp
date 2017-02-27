@@ -6,44 +6,32 @@ import SetRep from './SetReps';
 
 
 class WorkoutDescription extends React.Component {
-	constructor(props){
-		super(props);
-		this.exercises = [];
-	}
-	 render(props){
-        console.log(this.props.description.exercise);
-        
-        
-             this.exercises = this.props.description.map((detail,index)=>
+    constructor(props){
+        super(props);
+    }
+    render(props){
 
-                    
-             		<div>
+       let exercises = this.props.description.map((detail,index)=> {
+            
+            let details = detail.detail.map((item)=><SetRep set={++index} weight={item.weight} reps={item.reps}/>)
+                return <div>
                     <h1>{detail.exercise}</h1>
+                    {details}                            
+                </div>
+        });
 
-                    detail.detail.map((item,i)=> {
-
-                    <SetRep set={++index} weight={item.weight} reps={item.reps}/>
-
-                    });
-                    </div>
-                   
-            );
-        
-        
-        return(
+       return(
             <div className="exercise-tile small-12 columns text-center">
-              {this.exercises}
+                {exercises}
             </div>
         )
 
-    }
+   }
 }
 var mapStateToProps = (state) => {
-	console.log('State',state.addExercise);
-	//whatever gets returned in here will show up as props from exercise list 
-	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
+    console.log('State',state.addExercise);
   return {
-  	description:state.addExercise
+      description:state.addExercise
   }
   
 };

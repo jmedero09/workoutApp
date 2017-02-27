@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
 import {AddExerciseDetailsReducer} from '../reducers/reducers';
 import SetRep from './SetReps';
+import { Field, reduxForm } from 'redux-form';
 
 class ExerciseTile extends React.Component {
 	constructor(props){
@@ -19,19 +20,6 @@ class ExerciseTile extends React.Component {
     	var weight = this.refs.weight.value;
     	var reps = this.refs.reps.value;
 
-    	if(!weight.length || !reps.length ){
-
-    		return alert('Please be sure to fill out both weight and reps field');
-    	}
-
-    	if(weight.length > 4){
-
-    		return alert('Sorry weight can be no more then 4 chracters long');
-    	}
-    	if(reps.length > 2){
-
-    		return alert('Sorry reps can be no more then 2 chracters long');
-    	}
 
 		var attribute = $(e.target.attributes['data-reactid']).val();
 		var id = attribute.slice(10,46);
@@ -45,7 +33,8 @@ class ExerciseTile extends React.Component {
     if(e.key === 'Enter')
         this.handleSubmit(e);
   	}
-	render(props){
+	render(){
+		const { fields:{ exercise, weight, reps},handleSubmit,onKeyPress} = this.props;
 		return (
 			<div className="row small-centered">
 				<div className="exercise-tile small-12 columns">
@@ -60,13 +49,16 @@ class ExerciseTile extends React.Component {
 					<form onKeyPress={this.onKeyPress}>
 					    <div className="small-4 columns">
 					      <label>Weight</label>
-					        <input name="weight" type="number" ref="weight"/>
+					        <input required maxLength="4" name="weight" type="number" ref="weight" {...weight}/>
 					    </div>
+					    
 					    <div className="small-4 columns">
 					      <label>Reps</label>
-					        <input name="reps" type="number" ref="reps"/>
+					        <input required maxLength="2" name="reps" type="number" ref="reps"{...reps}/>
 					    </div>
 					</form>
+					<div className="textHelp">{weight.touched ? weight.error:''}</div>
+					<div className="textHelp">{reps.touched ? reps.error:''}</div>
 				</div>
 			</div>
 		)
@@ -77,4 +69,35 @@ class ExerciseTile extends React.Component {
   	exercise:state.addExercise
   }
 };
-export default connect(mapStateToProps)(ExerciseTile);
+function validate(values){
+	var errors = {};
+	console.log(values.weight);
+	if(!values.weight){
+
+		errors.weight = 'You Must Enter a weight';
+	}
+	if(!values.reps){
+
+		errors.reps = 'You Must Enter a rep';
+	}
+
+	return errors;
+}
+export default reduxForm({
+	form:'exerciseForm',
+	fields:['exercise','weight','reps'],
+	validate
+},mapStateToProps,)(ExerciseTile);
+
+
+
+
+
+
+
+
+
+
+
+
+

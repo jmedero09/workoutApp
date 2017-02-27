@@ -38,3 +38,10 @@ export var openWorkout = (id)=>{
 		id:id
 	}
 }
+
+
+export var createExercie = (props)=>{
+	return{
+		type:'CREATE_POST',
+	}	
+}

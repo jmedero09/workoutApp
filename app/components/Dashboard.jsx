@@ -6,8 +6,8 @@ import ExerciseTileList from './Exercise-Tile-List';
 import SetRepList from './SetRepsList';
 import moment from 'moment';
 import axios from 'axios';
-
-
+import {Link, hashHistory} from 'react-router';
+import { fields, reduxForm } from 'redux-form';
 
 
 class Dashboard extends React.Component{
@@ -20,18 +20,10 @@ class Dashboard extends React.Component{
 	handleSubmit(e){
     	e.preventDefault();
 
-
-
     	var{dispatch, exercise} = this.props;
 
     	var exerciseText = this.refs.addExercise.value;
 
-    	if(!exerciseText.length){
-    		return alert('Please Enter Title');
-    	}
-		if(exerciseText.length>20){
-			return alert('Title is to long keep between 1 and 20 chracters');
-		}
     	dispatch(actions.addExercise(exerciseText));
 
     	this.refs.addExercise.value = '';
@@ -45,30 +37,23 @@ class Dashboard extends React.Component{
 		e.preventDefault();
 		var{dispatch} = this.props;
 
-		var workout = prompt('Please enter the name of your workout');
-
-		if(!workout.length){
-
-			return alert('Please enter a title');
-		}
-		if(workout.length>15){
-
-			return alert('That title is too long must be less that 15 chracters');
-
-		}
 		dispatch(actions.saveWorkout(workout));
+		hashHistory.push('/savedworkout');
 	}
-	render(props){
-		console.log(this.props);
+	render(){
+		const { fields:{ exercise, weight, reps},handleSubmit} = this.props;
+		console.log(exercise);
+
 		return (
 			<div className="row">
 				<div className="columns samll-centred">
 					<ExerciseTileList/>
 				</div>
-				<div className="small-12 columns text-center samll-centred">
-			        <form>
-			          <input required className="addExerciseField text-center" type="text" ref="addExercise" placeholder="Add an Exercise"/>
-			          <button onClick={this.handleSubmit} className="button expanded">Add Exercise</button>
+				<div className="{small-12 columns text-center samll-centred} ">
+			        <form onSubmit={this.handleSubmit}>
+			          <input required minLength="4" maxLength="15"className="addExerciseField text-center" type="text" ref="addExercise" placeholder="Add an Exercise" {...exercise}/>
+			          <div className="textHelp">{exercise.touched ? exercise.error :''}</div>
+			          <button className="button expanded">Add Exercise</button>
 			          <button onClick={this.handleSave} className="button expanded">Save Workout</button>
 			        </form>
 				</div>
@@ -76,6 +61,22 @@ class Dashboard extends React.Component{
 		)
 	}
 }
-export default connect()(Dashboard);
+function validate(values){
+	var errors = {};
+	console.log(values.exercise);
+	if(!values.exercise){
+		errors.exercise = 'You Must Enter an exercise';
+	}
+	else if(values.exercise && values.exercise.length<4){
+		 errors.exercise = 'yooo u wallin hard body';
+	}
+
+	return errors;
+}
+export default reduxForm({
+	form:'dashboardForm',
+	fields:['exercise','weight','reps'],
+	validate
+},null,)(Dashboard);
 
 
