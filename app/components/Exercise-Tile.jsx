@@ -9,8 +9,6 @@ class ExerciseTile extends React.Component {
 	constructor(props){
 		super(props) 
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.onKeyPress = this.onKeyPress.bind(this);
-
 	}
 	handleSubmit(e){
 		e.preventDefault();
@@ -27,12 +25,8 @@ class ExerciseTile extends React.Component {
 
     	this.refs.weight.value = '';
     	this.refs.reps.value = '';
-
+    	
 	}
-	onKeyPress(e) {
-    if(e.key === 'Enter')
-        this.handleSubmit(e);
-  	}
 	render(){
 		const { fields:{ exercise, weight, reps},handleSubmit,onKeyPress} = this.props;
 		return (
@@ -46,7 +40,7 @@ class ExerciseTile extends React.Component {
 
 						})}
 					
-					<form onKeyPress={this.onKeyPress}>
+					<form onSubmit={this.handleSubmit}>
 					    <div className="small-4 columns">
 					      <label>Weight</label>
 					        <input required maxLength="4" name="weight" type="number" ref="weight" {...weight}/>
@@ -56,10 +50,12 @@ class ExerciseTile extends React.Component {
 					      <label>Reps</label>
 					        <input required maxLength="2" name="reps" type="number" ref="reps"{...reps}/>
 					    </div>
+					    <button>submit</button>
 					</form>
 					<div className="textHelp">{weight.touched ? weight.error:''}</div>
 					<div className="textHelp">{reps.touched ? reps.error:''}</div>
 				</div>
+
 			</div>
 		)
 	}

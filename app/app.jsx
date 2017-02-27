@@ -33,7 +33,7 @@ require('style!css!sass!scssApplicationStyles')
 ReactDOM.render(
 <Provider store={store}>
 	<Router history={hashHistory}>
-		<Route path="/" component={Main}>
+		<Route path="/" component={Login}>
 		 	<Route path="savedworkout" component={SavedWorkoutList}/>
 		 		<Route path="description" component={WorkoutDescription}/>
 			<IndexRoute component={Dashboard}/>
