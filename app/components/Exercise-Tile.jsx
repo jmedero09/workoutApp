@@ -30,8 +30,7 @@ class ExerciseTile extends React.Component {
 	render(){
 		const { fields:{ exercise, weight, reps},handleSubmit,onKeyPress} = this.props;
 		return (
-			<div className="row small-centered">
-				<div className="exercise-tile small-12 columns">
+				<div className="exercise-tile small-12 columns small-centered">
 					<h1>{this.props.title}</h1>
 
 						{this.props.detail.map((detail,index)=>{
@@ -41,20 +40,19 @@ class ExerciseTile extends React.Component {
 						})}
 					
 					<form onSubmit={this.handleSubmit}>
-					    <div className="small-4 columns">
+					    <div className="small-4 columns small-centered">
 					      <label>Weight</label>
 					        <input required maxLength="4" name="weight" type="number" ref="weight" {...weight}/>
 					    </div>
 					    
-					    <div className="small-4 columns">
+					    <div className="small-4 columns small-centered">
 					      <label>Reps</label>
 					        <input required maxLength="2" name="reps" type="number" ref="reps"{...reps}/>
 					    </div>
-					    <button>submit</button>
+					    <button className="button tiny">submit</button>
 					</form>
 					<div className="textHelp">{weight.touched ? weight.error:''}</div>
 					<div className="textHelp">{reps.touched ? reps.error:''}</div>
-				</div>
 
 			</div>
 		)

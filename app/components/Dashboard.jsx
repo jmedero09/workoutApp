@@ -1,51 +1,75 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {
+    connect
+} from 'react-redux';
 import * as actions from '../actions/actions';
-import {AddExerciseReducer} from '../reducers/reducers';
+import {
+    AddExerciseReducer
+} from '../reducers/reducers';
 import ExerciseTileList from './Exercise-Tile-List';
 import SetRepList from './SetRepsList';
 import moment from 'moment';
-import axios from 'axios';
-import {Link, hashHistory} from 'react-router';
-import { fields, reduxForm } from 'redux-form';
+import {
+    Link,
+    hashHistory
+} from 'react-router';
+import {
+    fields,
+    reduxForm
+} from 'redux-form';
 
 
-class Dashboard extends React.Component{
-	constructor(props){
-		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleSave = this.handleSave.bind(this);
-	}
+class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+    }
 
-	handleSubmit(e){
-    	e.preventDefault();
+    handleSubmit(e) {
+        e.preventDefault();
 
-    	var{dispatch, exercise} = this.props;
+        var {
+            dispatch,
+            exercise
+        } = this.props;
 
-    	var exerciseText = this.refs.addExercise.value;
+        var exerciseText = this.refs.addExercise.value;
 
-    	dispatch(actions.addExercise(exerciseText));
+        dispatch(actions.addExercise(exerciseText));
 
-    	this.refs.addExercise.value = '';
+        this.refs.addExercise.value = '';
 
-    	axios.get('https://jsonplaceholder.typicode.com/users')
-  		.then(function(response){
-    	console.log(response.data)
-  		});
-	}
-	handleSave(e){
-		e.preventDefault();
-		var{dispatch} = this.props;
+        fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'get'
+        }).then(function(response) {
+           return response.json()
+        }).then(function(data) {
+            console.log(data);
+        });        
 
-		dispatch(actions.saveWorkout(workout));
-		hashHistory.push('/savedworkout');
-	}
-	render(){
-		const { fields:{ exercise, weight, reps},handleSubmit} = this.props;
-		console.log(exercise);
+    }
+    handleSave(e) {
+        e.preventDefault();
+        var {
+            dispatch
+        } = this.props;
 
-		return (
-			<div className="row">
+        dispatch(actions.saveWorkout(workout));
+        hashHistory.push('/savedworkout');
+    }
+    render() {
+        const {
+            fields: {
+                exercise,
+                weight,
+                reps
+            },
+            handleSubmit
+        } = this.props;
+
+        return (
+            <div className="row">
 				<div className="columns samll-centred">
 					<ExerciseTileList/>
 				</div>
@@ -58,25 +82,22 @@ class Dashboard extends React.Component{
 			        </form>
 				</div>
 			</div>
-		)
-	}
+        )
+    }
 }
-function validate(values){
-	var errors = {};
-	console.log(values.exercise);
-	if(!values.exercise){
-		errors.exercise = 'You Must Enter an exercise';
-	}
-	else if(values.exercise && values.exercise.length<4){
-		 errors.exercise = 'yooo u wallin hard body';
-	}
 
-	return errors;
+function validate(values) {
+    var errors = {};
+    if (!values.exercise) {
+        errors.exercise = 'You Must Enter an exercise';
+    } else if (values.exercise && values.exercise.length < 4) {
+        errors.exercise = 'yooo u wallin hard body';
+    }
+
+    return errors;
 }
 export default reduxForm({
-	form:'dashboardForm',
-	fields:['exercise','weight','reps'],
-	validate
-},null,)(Dashboard);
-
-
+    form: 'dashboardForm',
+    fields: ['exercise', 'weight', 'reps'],
+    validate
+}, null, )(Dashboard);

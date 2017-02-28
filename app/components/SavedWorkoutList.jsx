@@ -10,7 +10,6 @@ class SavedWorkoutList extends React.Component{
 		super(props);
 	}
 	renderList(){
-		console.log(this.props.saved)
 		return this.props.saved.savedWorkout.map((savedWorkout,index)=>{
 			return(
 				<Link to="description"><li key={index}>
@@ -28,10 +27,6 @@ class SavedWorkoutList extends React.Component{
 	}	
 }
 var mapStateToProps = (state, props) => {
-	//console.log('yerrrr',state);
-	//whatever gets returned in here will show up as props from exercise list 
-	//var something = state.addExercise.map(function(exercise){return exercise.exercise});
-	console.log('sdfsdfsfdsdf',state)
   return {
   	saved:state
   }

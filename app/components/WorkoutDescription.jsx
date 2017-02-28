@@ -29,7 +29,6 @@ class WorkoutDescription extends React.Component {
    }
 }
 var mapStateToProps = (state) => {
-    console.log('State',state.addExercise);
   return {
       description:state.addExercise
   }
