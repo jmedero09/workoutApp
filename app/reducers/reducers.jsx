@@ -12,8 +12,12 @@ export var AddExerciseReducer = (state=[],action)=>{
 
 		case 'ADD_EXERCISE_DETAILS':
 			var exerciseIndex = state.findIndex(function(exercise){
+				console.log(action)
+				console.log(exercise.id,action.id)
 			  return exercise.id === action.id
+
 			});
+			console.log(exerciseIndex)
 			return update(state, {
 			  [exerciseIndex]: {
 			    detail: {
@@ -43,3 +47,6 @@ export var saveWorkoutReducer =(state=[],action)=>{
 }
 
 export default (AddExerciseReducer);
+
+// f133fa67-58e8-4b45-9a54-1c5e26192b79 
+// .$f133fa67-58e8-4b45-9a54-1c5e26192b

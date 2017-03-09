@@ -20,7 +20,7 @@ class ExerciseTile extends React.Component {
 
 
 		var attribute = $(e.target.attributes['data-reactid']).val();
-		var id = attribute.slice(10,46);
+		var id = attribute.slice(12,48);
     	dispatch(actions.addExerciseDetails(id,weight,reps));
 
     	this.refs.weight.value = '';
@@ -35,19 +35,19 @@ class ExerciseTile extends React.Component {
 
 						{this.props.detail.map((detail,index)=>{
 
-							return <SetRep key={index} set={++index} weight={detail.weight} reps={detail.reps}/>
+							return (<SetRep key={index} set={++index} weight={detail.weight} reps={detail.reps}/>)
 
 						})}
 					
 					<form onSubmit={this.handleSubmit}>
 					    <div className="small-4 columns small-centered">
 					      <label>Weight</label>
-					        <input required maxLength="4" name="weight" type="number" ref="weight" {...weight}/>
+					        <input required maxLength={4} name="weight" type="number" ref="weight" {...weight}/>
 					    </div>
 					    
 					    <div className="small-4 columns small-centered">
 					      <label>Reps</label>
-					        <input required maxLength="2" name="reps" type="number" ref="reps"{...reps}/>
+					        <input required maxLength={2} name="reps" type="number" ref="reps"{...reps}/>
 					    </div>
 					    <button className="button tiny">submit</button>
 					</form>
@@ -65,7 +65,6 @@ class ExerciseTile extends React.Component {
 };
 function validate(values){
 	var errors = {};
-	console.log(values.weight);
 	if(!values.weight){
 
 		errors.weight = 'You Must Enter a weight';
@@ -73,6 +72,14 @@ function validate(values){
 	if(!values.reps){
 
 		errors.reps = 'You Must Enter a rep';
+	}
+	if(values.weight && values.weight.length > 4){
+
+		errors.weight = 'Weight can only be 4 characters long';
+	}
+	if(values.reps && values.reps.length > 2){
+
+		errors.reps = 'reps can only be up tp 2 characters';
 	}
 
 	return errors;

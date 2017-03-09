@@ -10,12 +10,10 @@ class SetRepsList extends React.Component {
 	renderList(){
 		return this.props.map((details,index)=>{
 			return(
-
 				<li key={index}>
 					<SetReps weight={details.weight} reps={details.reps}/>
 				</li>
 			)
-
 		});					
 	}
 	render(props){

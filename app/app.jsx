@@ -8,14 +8,13 @@ import SavedWorkoutList from './components/SavedWorkoutList';
 import Login from './components/Login';
 import * as actions from './actions/actions';
 import Main from './components/Main';
-import WorkoutDescription from './components/WorkoutDescription'
+import WorkoutDescription from './components/WorkoutDescription';
 
 var store = require('./store/configureStore').configure();
 
 export var subscribe = store.subscribe(()=>{
 
 	var state = store.getState();
-	console.log('New State ', store.getState());
 
 });
 

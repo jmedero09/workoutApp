@@ -55,6 +55,8 @@ class Dashboard extends React.Component {
             dispatch
         } = this.props;
 
+        var workout = prompt('Enter what you worked out today');
+
         dispatch(actions.saveWorkout(workout));
         hashHistory.push('/savedworkout');
     }
@@ -91,7 +93,7 @@ function validate(values) {
     if (!values.exercise) {
         errors.exercise = 'You Must Enter an exercise';
     } else if (values.exercise && values.exercise.length < 4) {
-        errors.exercise = 'yooo u wallin hard body';
+        errors.exercise = 'Length must be at least 4 characters';
     }
 
     return errors;

@@ -14,10 +14,10 @@ class WorkoutDescription extends React.Component {
        let exercises = this.props.description.map((detail,index)=> {
             
             let details = detail.detail.map((item)=><SetRep set={++index} weight={item.weight} reps={item.reps}/>)
-                return <div>
+                return( <div>
                     <h1>{detail.exercise}</h1>
                     {details}                            
-                </div>
+                </div>)
         });
 
        return(
@@ -28,7 +28,7 @@ class WorkoutDescription extends React.Component {
 
    }
 }
-var mapStateToProps = (state) => {
+var mapStateToProps = (state,props) => {
   return {
       description:state.addExercise
   }
