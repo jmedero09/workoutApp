@@ -1,50 +1,32 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   entry: [
-    'script!jquery/dist/jquery.min.js',
-    'script!foundation-sites/dist/foundation.min.js',
-    './app/app.jsx'
-  ],
-  externals: {
-    jquery: 'jQuery'
-  },
-  plugins: [
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery'
-    })
+    'webpack-hot-middleware/client',
+    './app/index',
   ],
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/',
   },
-  resolve: {
-    root: __dirname,
-    alias: {
-      applicationStyles: 'app/styles/app.css',
-      scssApplicationStyles:'app/styles/app.scss',
-      reducers:'app/reducers/reducers.jsx',
-    },
-    extensions: ['', '.js', '.jsx']
-  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+  ],
   module: {
-    loaders: [
-      {
+    loaders: [{
+      test: /.jsx?$/,
         loader: 'babel-loader',
+        exclude: /node_modules/,
         query: {
-          presets: ['react', 'es2015', 'stage-0']
-        },
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/
-      }
-    ]
+          presets: ['es2015', 'react']
+        }}, {
+      test: /\.css?$/,
+      loaders: ['style', 'raw'],
+      include: __dirname,
+    }],
   },
-  sassLoader: {
-    includePaths: [
-      path.resolve(__dirname, './node_modules/foundation-sites/scss')
-    ]
-  },
-  devtool: 'cheap-module-eval-source-map'
 };

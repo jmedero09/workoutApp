@@ -1,25 +1,14 @@
 import React from 'react';
-import {
-    connect
-} from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
-import {
-    AddExerciseReducer
-} from '../reducers/reducers';
+import {AddExerciseReducer} from '../reducers/reducers';
 import ExerciseTileList from './Exercise-Tile-List';
 import SetRepList from './SetRepsList';
 import moment from 'moment';
-import {
-    Link,
-    hashHistory
-} from 'react-router';
-import {
-    fields,
-    reduxForm
-} from 'redux-form';
+import { Link,hashHistory} from 'react-router';
+import { fields,reduxForm} from 'redux-form';
 
-
-class Dashboard extends React.Component {
+export default class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,7 +34,7 @@ class Dashboard extends React.Component {
         }).then(function(response) {
            return response.json()
         }).then(function(data) {
-            console.log(data);
+            console.log('poop');
         });        
 
     }
@@ -67,27 +56,35 @@ class Dashboard extends React.Component {
                 weight,
                 reps
             },
-            handleSubmit
+            handleSubmit,
+            isAuthenticated
         } = this.props;
 
         return (
-            <div className="row">
-				<div className="columns samll-centred">
-					<ExerciseTileList/>
-				</div>
-				<div className="{small-12 columns text-center samll-centred} ">
-			        <form onSubmit={this.handleSubmit}>
-			          <input required minLength="4" maxLength="15"className="addExerciseField text-center" type="text" ref="addExercise" placeholder="Add an Exercise" {...exercise}/>
-			          <div className="textHelp">{exercise.touched ? exercise.error :''}</div>
-			          <button className="button expanded">Add Exercise</button>
-			          <button onClick={this.handleSave} className="button expanded">Save Workout</button>
-			        </form>
-				</div>
-			</div>
+            <div>
+                {isAuthenticated &&
+                <div className="row">
+                    <div className="columns samll-centred">
+                        <ExerciseTileList/>
+                    </div>
+                    <div className="{small-12 columns text-center samll-centred} ">
+                        <form onSubmit={this.handleSubmit}>
+                        <input required minLength="4" maxLength="15"className="addExerciseField text-center" type="text" ref="addExercise" placeholder="Add an Exercise" {...exercise}/>
+                        <div className="textHelp">{exercise.touched ? exercise.error :''}</div>
+                        <button className="button expanded">Add Exerasdasdcise</button>
+                        <button onClick={this.handleSave} className="button expanded">Save Workout</button>
+                        </form>
+                    </div>
+                </div>
+                }
+            </div>
+
         )
     }
 }
-
+Dashboard.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
+};
 function validate(values) {
     var errors = {};
     if (!values.exercise) {

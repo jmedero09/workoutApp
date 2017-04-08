@@ -5,7 +5,7 @@ import ExerciseTile from './Exercise-Tile';
 class ExerciseTileList extends React.Component {
 	constructor(props){
 		super(props);
-	}
+	}else
 	renderList(){
 		return this.props.exercise.map((exercise,index)=>{
 			return(

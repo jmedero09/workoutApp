@@ -1,31 +1,44 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 
-export var Login = React.createClass({
-	render:function(){
-		return(
+export default class Login extends Component {
+  render() {
+    const {errorMessage} = this.props
+
+  		return(
 			<div className="row">
 				<div className="small-12 small-centered columns login-container">
 					<p>Please Use your email and password to login to your dashboard</p>
 					<div className="row">
 						<div>
 							<div className="small-11 small-centered columns">
-				        	<input className="email text-center" type="text" ref="email" placeholder="Email"/>
-							<input className="password text-center" type="text" ref="password" placeholder="Password"/>
+				        	<input style={{ marginRight: '5px' }} className="username text-center" type="text" ref="username" placeholder="username"/>
+							<input style={{ marginRight: '5px' }} className="password text-center" type="password" ref="password" placeholder="Password"/>
 						</div>
-
-							<button className="button expanded">Login</button>
+							<button onClick={(event) => this.handleClick(event)}  className="button expanded">Login</button>
 				          	<button className="button expanded">Create User</button>
-
 						</div>
 					</div>					
 				</div>
-
 			</div>
 		)
-	}
-});
+  }
+  handleClick(event) {
+    const username = this.refs.username 
+    const password = this.refs.password
+    const creds = {
+      username: username
+        .value
+        .trim(),
+      password: password
+        .value
+        .trim()
+    }
+    this.props.onLoginClick(creds)
+  }
+};
 
-
-
-export default (Login)
-
+Login.propTypes = {
+  onLoginClick: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string
+}
