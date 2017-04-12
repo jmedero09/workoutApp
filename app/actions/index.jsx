@@ -1,54 +1,46 @@
-import * as redux from'redux';
+import * as redux from 'redux';
 import uuid from 'node-uuid';
 import moment from 'moment';
-// The middleware to call the API for quotes
-import { CALL_API } from './middleware/api';
 
+export var addExercise = exercise => {
+  return {
+    type: 'ADD_EXERCISE',
+    id: uuid(),
+    exercise: exercise,
+    details: []
+  };
+};
 
-export var addExercise = (exercise)=>{
-	return{
-		type:'ADD_EXERCISE',
-		id:uuid(),
-		exercise:exercise,
-		details:[]
+export var addExerciseDetails = (id, weight, reps) => {
+  return {
+    type: 'ADD_EXERCISE_DETAILS',
+    id: id,
+    weight: weight,
+    reps: reps
+  };
+};
 
-	}
-}
+export var saveWorkout = workoutLabel => {
+  return {
+    type: 'SAVE_WORKOUT',
+    workoutLabel: workoutLabel,
+    date: moment().format('MMM Do YYYY'),
+    storedSessoin: []
+  };
+};
 
-export var addExerciseDetails = (id,weight,reps)=>{
-	return{
-		type:'ADD_EXERCISE_DETAILS',
-		id:id,
-		weight:weight,
-		reps:reps		
-	}
+export var openWorkout = id => {
+  return {
+    type: 'OPEN_WORKOUT',
+    id: id
+  };
+};
 
-}
-
-export var saveWorkout = (workoutLabel)=>{
-	return{
-		type:'SAVE_WORKOUT',
-		workoutLabel:workoutLabel,
-		date: moment().format("MMM Do YYYY"),
-		storedSessoin:[]	
-	}
-}
-
-export var openWorkout = (id)=>{
-	return{
-		type:'OPEN_WORKOUT',
-		id:id
-	}
-}
-
-
-export var createExercie = (props)=>{
-	return{
-		type:'CREATE_POST',
-	}	
-}
-
-
+export var createExercie = props => {
+  return {
+    type: 'CREATE_POST'
+  };
+};
 
 // There are three possible states for our login
 // process and we need actions for each of them
@@ -61,7 +53,7 @@ function requestLogin(creds) {
     type: LOGIN_REQUEST,
     isFetching: true,
     isAuthenticated: false,
-    creds,
+    creds
   };
 }
 
@@ -70,7 +62,7 @@ function receiveLogin(user) {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    id_token: user.id_token,
+    id_token: user.id_token
   };
 }
 
@@ -79,7 +71,7 @@ function loginError(message) {
     type: LOGIN_FAILURE,
     isFetching: false,
     isAuthenticated: false,
-    message,
+    message
   };
 }
 
@@ -95,7 +87,7 @@ function requestLogout() {
   return {
     type: LOGOUT_REQUEST,
     isFetching: true,
-    isAuthenticated: true,
+    isAuthenticated: true
   };
 }
 
@@ -103,7 +95,7 @@ function receiveLogout() {
   return {
     type: LOGOUT_SUCCESS,
     isFetching: false,
-    isAuthenticated: false,
+    isAuthenticated: false
   };
 }
 
@@ -113,17 +105,15 @@ export function loginUser(creds) {
   const config = {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `username=${creds.username}&password=${creds.password}`,
+    body: `username=${creds.username}&password=${creds.password}`
   };
 
-  return (dispatch) => {
+  return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds));
     return fetch('http://localhost:8080/auth/login', config)
-      .then(response =>
-        response.json()
-        .then(user => ({ user, response })),
-      ).then(({ user, response }) => {
+      .then(response => response.json().then(user => ({ user, response })))
+      .then(({ user, response }) => {
         if (!response.ok) {
           // If there was a problem, we want to
           // dispatch the error condition
@@ -131,47 +121,21 @@ export function loginUser(creds) {
           return Promise.reject(user);
         }
 
-          // If login was successful, set the token in local storage
+        // If login was successful, set the token in local storage
         localStorage.setItem('id_token', user.token);
 
-          // Dispatch the success action
+        // Dispatch the success action
         return dispatch(receiveLogin(user));
-      }).catch(err => new Error(err));
+      })
+      .catch(err => new Error(err));
   };
 }
 
 // Logs the user out
 export function logoutUser() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestLogout());
     localStorage.removeItem('id_token');
     dispatch(receiveLogout());
-  };
-}
-
-export const QUOTE_REQUEST = 'QUOTE_REQUEST';
-export const QUOTE_SUCCESS = 'QUOTE_SUCCESS';
-export const QUOTE_FAILURE = 'QUOTE_FAILURE';
-
-// Uses the API middlware to get a quote
-export function fetchQuote() {
-  return {
-    [CALL_API]: {
-      endpoint: 'random-quote',
-      types: [QUOTE_REQUEST, QUOTE_SUCCESS, QUOTE_FAILURE],
-    },
-  };
-}
-
-// Same API middlware is used to get a
-// secret quote, but we set authenticated
-// to true so that the auth header is sent
-export function fetchSecretQuote() {
-  return {
-    [CALL_API]: {
-      endpoint: 'workouts',
-      authenticated: true,
-      types: [QUOTE_REQUEST, QUOTE_SUCCESS, QUOTE_FAILURE],
-    },
   };
 }
