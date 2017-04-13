@@ -6,14 +6,18 @@ const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const webpackPath = path.join(__dirname, '../',  'webpack.config');
-
+const webpackPath = path.join(__dirname, '../', 'webpack.config');
 const config = require(webpackPath);
 
 const app = express();
 
 const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(
+  webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  })
+);
 app.use(webpackHotMiddleware(compiler));
 
 require('./config/middleware')(app);

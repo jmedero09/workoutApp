@@ -18,7 +18,6 @@ class ExerciseTile extends React.Component {
     var weight = this.refs.weight.value;
     var reps = this.refs.reps.value;
 
-    var attribute = $(e.target.attributes['data-reactid']).val();
     var id = attribute.slice(12, 48);
     dispatch(actions.addExerciseDetails(id, weight, reps));
 

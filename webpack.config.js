@@ -2,17 +2,19 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: ['webpack-hot-middleware/client', './app/index'],
+  entry: ['./app/index'],
   output: {
     path: path.join(__dirname, './public'),
-    filename: 'bundle.js',
-    publicPath: './public'
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
   ],
   module: {
     loaders: [
@@ -20,9 +22,8 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        include: path.resolve(__dirname, './app'),
         query: {
-          presets: ['es2015', 'react']
+          presets: ['react', 'es2015']
         }
       },
       {
@@ -31,8 +32,5 @@ module.exports = {
         include: __dirname
       }
     ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
   }
 };

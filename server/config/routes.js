@@ -9,7 +9,7 @@ module.exports = app => {
   app.use('/api/users', userRouter);
   app.use('/auth', authRouter);
   app.use('/api/workouts', workoutRouter);
-  app.all('*', (req, res) => {
+  app.all('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public', 'index.html'));
   });
 };

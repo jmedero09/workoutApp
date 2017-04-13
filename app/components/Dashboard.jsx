@@ -28,16 +28,6 @@ export class Dashboard extends React.Component {
     dispatch(actions.addExercise(exerciseText));
 
     this.refs.addExercise.value = '';
-
-    fetch('https://jsonplaceholder.typicode.com/users', {
-      method: 'get'
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        console.log('poop');
-      });
   }
   handleSave(e) {
     e.preventDefault();
@@ -94,9 +84,7 @@ export class Dashboard extends React.Component {
     );
   }
 }
-Dashboard.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
-};
+
 function validate(values) {
   var errors = {};
   if (!values.exercise) {
