@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ExerciseTile from './Exercise-Tile';
 
 class ExerciseTileList extends React.Component {
@@ -24,9 +23,3 @@ class ExerciseTileList extends React.Component {
     );
   }
 }
-var mapStateToProps = (state, props) => {
-  return {
-    exercise: state.addExercise
-  };
-};
-export default connect(mapStateToProps)(ExerciseTileList);

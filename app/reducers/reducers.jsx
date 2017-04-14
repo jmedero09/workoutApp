@@ -11,7 +11,7 @@ import {
   QUOTE_FAILURE
 } from '../actions';
 
-export var AddExerciseReducer = (state = [], action) => {
+export var addExercise = (state = [], action) => {
   switch (action.type) {
     case 'ADD_EXERCISE':
       return update(state, {
@@ -48,7 +48,7 @@ export var AddExerciseReducer = (state = [], action) => {
   }
 };
 
-export var saveWorkoutReducer = (state = [], action) => {
+export var saveWorkout = (state = [], action) => {
   switch (action.type) {
     case 'SAVE_WORKOUT':
       return update(state, {
@@ -103,10 +103,8 @@ export var auth = (
 
 const workoutReducers = combineReducers({
   auth,
-  AddExerciseReducer,
-  saveWorkoutReducer
+  addExercise,
+  saveWorkout
 });
 
 export default workoutReducers;
-// f133fa67-58e8-4b45-9a54-1c5e26192b79
-// .$f133fa67-58e8-4b45-9a54-1c5e26192b

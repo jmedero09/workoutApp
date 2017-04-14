@@ -1,7 +1,7 @@
 console.log('dsadsadsa');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Router, IndexRoute, historyHash } from 'react-router';
+import { Route, Router, IndexRoute, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ReduxPromise from 'redux-promise';
 import Dashboard from './components/Dashboard';
@@ -11,21 +11,18 @@ import * as actions from './actions';
 import Main from './components/Main';
 import WorkoutDescription from './components/WorkoutDescription';
 var store = require('./store/configureStore').configure();
-export var subscribe = store.subscribe(() => {
-  var state = store.getState();
-});
 
 // $(document).foundation();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={historyHash}>
+    <HashRouter>
       <Route path="/" component={Main}>
         <Route path="savedworkout" component={SavedWorkoutList} />
         <Route path="description" component={WorkoutDescription} />
         <IndexRoute component={Dashboard} />
       </Route>
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById('app')
 );
